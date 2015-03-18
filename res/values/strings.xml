@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SysEmbdTp1</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_java_prime">Nombre premier ? [Java]</string>
+    <string name="btn_c_prime">Nombre premier ? [C]</string>
+
+</resources>

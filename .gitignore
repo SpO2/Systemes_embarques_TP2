@@ -64,6 +64,13 @@ local.properties
 /.gradle
 /.idea
 *.iml
+# NDK Rules #
+################
+*.o
+*.so
+obj/*
+target/*
+*.so
 # Custom rules #
 ################
 *.*~
