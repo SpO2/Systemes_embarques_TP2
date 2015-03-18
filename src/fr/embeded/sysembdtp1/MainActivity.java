@@ -113,11 +113,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		TextView tv = (TextView) MainActivity.this.findViewById(R.id.number);
 		if (!(tv.getText().toString().trim().isEmpty())){
 			String executionTime = "";
-			currentNumber = Integer.parseInt(tv.getText().toString());
 			String Result = "";
 			long startTime;
 			long endTime;
 			String time = "";
+			currentNumber = Integer.parseInt(tv.getText().toString());
 			switch (v.getId()) {
 			case R.id.btnCPrime:{
 				startTime = System.currentTimeMillis();
