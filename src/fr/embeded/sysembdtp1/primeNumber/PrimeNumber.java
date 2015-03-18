@@ -1,6 +1,5 @@
 package fr.embeded.sysembdtp1.primeNumber;
 
-import java.lang.Math;
 
 /**
  * Class for prime number operations.

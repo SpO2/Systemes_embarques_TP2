@@ -19,6 +19,30 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * Constant for the prime number list string.
 	 */
 	private final static String PRIME_NUMBER_LIST = " - Liste des nombres premiers : ";
+	/**
+	 * Constant for execution time.
+	 */
+	private final static String EXECUTION_TIME = "Temps d'exécution ";
+	/**
+	 * Constant for external prime number method name.
+	 */
+	private final static String EXTERNAL_PRIME_METHOD = "PrimeMethod (C)";
+	/**
+	 * Constant for external prime number list method name.
+	 */
+	private final static String EXTERNAL_PRIMELIST_METHOD = "PrimeListMethod (C)";
+	/**
+	 * Constant for java prime number method name.
+	 */
+	private final static String JAVA_PRIME_METHOD = "PrimeMethod (Java)";
+	/**
+	 * Constant for java prime list number method name.
+	 */
+	private final static String JAVA_PRIMELIST_METHOD = "PrimeListMethod (Java)";
+	/**
+	 * Constant for millisecond unit.
+	 */
+	private final static String MILLISECOND_UNIT = " ms.";
 	
 	/**
 	 * Current Number entry.
@@ -88,20 +112,44 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		TextView tv = (TextView) MainActivity.this.findViewById(R.id.number);
 		if (!(tv.getText().toString().trim().isEmpty())){
+			String executionTime = "";
 			currentNumber = Integer.parseInt(tv.getText().toString());
 			String Result = "";
+			long startTime;
+			long endTime;
+			String time = "";
 			switch (v.getId()) {
 			case R.id.btnCPrime:{
+				startTime = System.currentTimeMillis();
 				Result = String.valueOf(currentNumber) + " " + stringPrimeNumber(currentNumber);
+				endTime = System.currentTimeMillis();
+				time = String.valueOf((endTime - startTime));
+				executionTime = executionTime + EXECUTION_TIME + EXTERNAL_PRIME_METHOD + 
+						time.toString() + MILLISECOND_UNIT;
+				startTime = System.currentTimeMillis();
 				int[] primelist = stringPrimeNumberList(currentNumber);
 				String nbrList = Arrays.toString(primelist);
 				Result = Result + PRIME_NUMBER_LIST + nbrList;
+				endTime = System.currentTimeMillis();
+				time  = String.valueOf((endTime - startTime));
+				executionTime = executionTime +  " " + EXECUTION_TIME + EXTERNAL_PRIMELIST_METHOD + 
+						time.toString() + MILLISECOND_UNIT;
 				break;
 			}
 			case R.id.btnJavaPrime:{
 				PrimeNumber primeNumber = new PrimeNumber(currentNumber);
+				startTime = System.currentTimeMillis();
 				Result = String.valueOf(currentNumber) + " " + primeNumber.isPrimeNumber();
+				endTime = System.currentTimeMillis();
+				time = String.valueOf((endTime - startTime));
+				executionTime = executionTime + EXECUTION_TIME + JAVA_PRIME_METHOD + 
+						time.toString() + MILLISECOND_UNIT;
+				startTime = System.currentTimeMillis();
 				Result = Result + PRIME_NUMBER_LIST + primeNumber.primeNumberList();
+				endTime = System.currentTimeMillis();
+				time  = String.valueOf((endTime - startTime));
+				executionTime = executionTime + " " + EXECUTION_TIME + JAVA_PRIMELIST_METHOD +
+						time.toString() + MILLISECOND_UNIT;
 				break;
 			}
 			default:
@@ -110,6 +158,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			Toast toast = Toast.makeText(MainActivity.this.getApplicationContext(), Result, Toast.LENGTH_LONG);
 			toast.show();
+			Toast execToast = Toast.makeText(MainActivity.this.getApplicationContext(), executionTime, Toast.LENGTH_LONG);
+			execToast.show();
 		}
 	}
 }
