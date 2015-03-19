@@ -66,5 +66,6 @@ JNIEXPORT jintArray JNICALL Java_fr_embeded_sysembdtp1_MainActivity_stringPrimeN
 	}
 	result = (*env)->NewIntArray(env, size);
 	(*env)->SetIntArrayRegion(env, result, 0, size, list);
+	free(list);
     return result;
 }

@@ -72,6 +72,7 @@ public class PrimeNumber {
 		int i, j, diviseur;
 		String result;
 		result = "";
+		
 		for (i=2; i<currentNumber; i++){
 			diviseur = 0;
 			for (j=1; j<=i; j++){
