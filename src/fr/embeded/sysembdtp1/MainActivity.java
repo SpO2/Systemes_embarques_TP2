@@ -82,11 +82,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		currentNumber = 0;
-		btnJava = (Button) this.findViewById(R.id.btnJavaPrime);
-		btnC = (Button) this.findViewById(R.id.btnCPrime);
-		btnC.setOnClickListener(this);
-		btnJava.setOnClickListener(this);
+		this.currentNumber = 0;
+		this.btnJava = (Button) this.findViewById(R.id.btnJavaPrime);
+		this.btnC = (Button) this.findViewById(R.id.btnCPrime);
+		this.btnC.setOnClickListener(this);
+		this.btnJava.setOnClickListener(this);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			long startTime;
 			long endTime;
 			String time = "";
-			currentNumber = Integer.parseInt(tv.getText().toString());
+			this.currentNumber = Integer.parseInt(tv.getText().toString());
 			switch (v.getId()) {
 			case R.id.btnCPrime:{
 				startTime = System.currentTimeMillis();
