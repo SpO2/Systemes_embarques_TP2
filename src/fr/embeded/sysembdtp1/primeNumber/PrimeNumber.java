@@ -43,25 +43,22 @@ public class PrimeNumber {
 		double limite;
 		test = 0;
 		limite = Math.sqrt(currentNumber) + 1;
-		if (currentNumber != 0){
-			if (currentNumber != 1){
-				if (currentNumber % 2 == 0)
-					test = 1;
-				else{
-					for (i = 3 ; i < limite && test != 1; i+=2)
-						if (currentNumber % i == 0)
-							test = 1;
-				}
-				if (test != 1)
-					return PRIME_NUMBER;
-				else
-					return NOT_PRIME_NUMBER;
-				
+		if (currentNumber >= 2){
+			if (currentNumber % 2 == 0)
+				test = 1;
+			else{
+				for (i = 3 ; i < limite && test != 1; i+=2)
+					if (currentNumber % i == 0)
+						test = 1;
 			}
+			if (test != 1)
+				return PRIME_NUMBER;
 			else
-				return NOT_PRIME_NUMBER;
+				return NOT_PRIME_NUMBER;	
 		}
-		return "";
+		else{
+			return NOT_PRIME_NUMBER;
+		}	
 	}
 	
 	/**
@@ -72,24 +69,27 @@ public class PrimeNumber {
 		int i, j, diviseur;
 		String result;
 		result = "";
-		
-		for (i=2; i<currentNumber; i++){
-			diviseur = 0;
-			for (j=1; j<=i; j++){
-				if (i%j==0){
-			        diviseur++;
-			    }
+		if (currentNumber >=2){
+			for (i=2; i<currentNumber; i++){
+				diviseur = 0;
+				for (j=1; j<=i; j++){
+					if (i%j==0){
+				        diviseur++;
+				    }
+				}
+				if (diviseur == 2){
+					if (result == ""){
+						result = String.valueOf(i);
+				    }
+				    else{
+				    	result = result + COMMA_SEPARATOR + String.valueOf(i);
+				    }
+				}
 			}
-			if (diviseur == 2){
-				if (result == ""){
-					result = String.valueOf(i);
-			    }
-			    else{
-			    	result = result + COMMA_SEPARATOR + String.valueOf(i);
-			    }
-			}
+			return result;
+		}else{
+			return "";
 		}
-		return result;
 	}
 }
 

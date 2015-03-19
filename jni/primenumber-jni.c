@@ -14,24 +14,22 @@ JNIEXPORT jstring JNICALL Java_fr_embeded_sysembdtp1_MainActivity_stringPrimeNum
 	jint i, compter, test,limite;
 	test = compter = 0;
 	limite = sqrt(number) + 1;
-	if (number != 0){
-		if (number != 1){
-			if (number % 2 == 0)
-				test = 1;
-			else{
-				for (i = 3 ; i < limite && ! test; i+=2, compter++)
-					if (number % i == 0)
-						test = 1;
-			}
-			if (!test)
-				return (*env)->NewStringUTF(env, PRIME_NUMBER);
-			else
-				return (*env)->NewStringUTF(env, NOT_PRIME_NUMBER);
-			return "";
+	if (number >=2){
+		if (number % 2 == 0)
+			test = 1;
+		else{
+			for (i = 3 ; i < limite && ! test; i+=2, compter++)
+				if (number % i == 0)
+					test = 1;
 		}
+		if (!test)
+			return (*env)->NewStringUTF(env, PRIME_NUMBER);
 		else
 			return (*env)->NewStringUTF(env, NOT_PRIME_NUMBER);
+		return "";
 	}
+	else
+		return (*env)->NewStringUTF(env, NOT_PRIME_NUMBER);
 }
 
 /**
@@ -44,28 +42,33 @@ JNIEXPORT jintArray JNICALL Java_fr_embeded_sysembdtp1_MainActivity_stringPrimeN
 	jint* list;
 	diviseur = 0;
 	size = 0;
-	for (i=2; i<number; i++){
-		diviseur = 0;
-		for (j=1; j<=i; j++){
-			if (i%j==0){
-				diviseur++;
-		    }
+	if (number >= 2){
+		for (i=2; i<number; i++){
+			diviseur = 0;
+			for (j=1; j<=i; j++){
+				if (i%j==0){
+					diviseur++;
+				}
+			}
+			if (diviseur == 2){
+				if (size == 0){
+					size = 1;
+					list = (int *) malloc(size * sizeof(int));
+					list[size-1] = i;
+				}
+				else{
+					size = size+1;
+					list = realloc(list, size * sizeof(int));
+					list[size-1] = i;
+				}
+			}
 		}
-		if (diviseur == 2){
-			if (size == 0){
-				size = 1;
-				list = (int *) malloc(size * sizeof(int));
-				list[size-1] = i;
-		    }
-		    else{
-		    	size = size+1;
-		    	list = realloc(list, size * sizeof(int));
-		    	list[size-1] = i;
-		    }
-		}
+		result = (*env)->NewIntArray(env, size);
+		(*env)->SetIntArrayRegion(env, result, 0, size, list);
+		free(list);
+		return result;
 	}
-	result = (*env)->NewIntArray(env, size);
-	(*env)->SetIntArrayRegion(env, result, 0, size, list);
-	free(list);
-    return result;
+	else{
+		return NULL;
+	}
 }

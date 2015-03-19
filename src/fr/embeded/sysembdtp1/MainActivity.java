@@ -121,15 +121,22 @@ public class MainActivity extends Activity implements OnClickListener {
 			switch (v.getId()) {
 			case R.id.btnCPrime:{
 				startTime = System.currentTimeMillis();
-				Result = String.valueOf(currentNumber) + " " + stringPrimeNumber(currentNumber);
+				
+				Result = Result + String.valueOf(currentNumber) + " " + stringPrimeNumber(currentNumber);
+				
 				endTime = System.currentTimeMillis();
 				time = String.valueOf((endTime - startTime));
 				executionTime = executionTime + EXECUTION_TIME + EXTERNAL_PRIME_METHOD + 
 						time.toString() + MILLISECOND_UNIT;
+				
 				startTime = System.currentTimeMillis();
+				
 				int[] primelist = stringPrimeNumberList(currentNumber);
-				String nbrList = Arrays.toString(primelist);
-				Result = Result + PRIME_NUMBER_LIST + nbrList;
+				if (primelist != null){
+					String nbrList = Arrays.toString(primelist);
+					Result = Result + PRIME_NUMBER_LIST + nbrList;
+				}
+				
 				endTime = System.currentTimeMillis();
 				time  = String.valueOf((endTime - startTime));
 				executionTime = executionTime +  " " + EXECUTION_TIME + EXTERNAL_PRIMELIST_METHOD + 
@@ -139,13 +146,18 @@ public class MainActivity extends Activity implements OnClickListener {
 			case R.id.btnJavaPrime:{
 				PrimeNumber primeNumber = new PrimeNumber(currentNumber);
 				startTime = System.currentTimeMillis();
-				Result = String.valueOf(currentNumber) + " " + primeNumber.isPrimeNumber();
+				
+				Result = Result + String.valueOf(currentNumber) + " " + primeNumber.isPrimeNumber();
+				
 				endTime = System.currentTimeMillis();
 				time = String.valueOf((endTime - startTime));
 				executionTime = executionTime + EXECUTION_TIME + JAVA_PRIME_METHOD + 
 						time.toString() + MILLISECOND_UNIT;
+				
 				startTime = System.currentTimeMillis();
+				
 				Result = Result + PRIME_NUMBER_LIST + primeNumber.primeNumberList();
+				
 				endTime = System.currentTimeMillis();
 				time  = String.valueOf((endTime - startTime));
 				executionTime = executionTime + " " + EXECUTION_TIME + JAVA_PRIMELIST_METHOD +
